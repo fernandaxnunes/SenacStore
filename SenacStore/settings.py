@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 import pymysql
+from decouple import config
+
 
 pymysql.version_info = (1, 4, 6, 'final', 0)
 pymysql.install_as_MySQLdb()
@@ -25,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-raqe+#hi!^ru6a)tf#=sjq98&7mpuwn5-6dgf@m@g@eq&tow5r'
+SECRET_KEY = config('SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,11 +92,11 @@ WSGI_APPLICATION = 'SenacStore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': '2D5dAeAHHhHc-F-FhC3GdEh2h6aDDEhb',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '31502',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
     }
 }
 
@@ -150,13 +152,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'nunesfnds546@gmail.com'
-EMAIL_HOST_PASSWORD = 'jedi csur juur ugwm'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'duio2vblg',
-    'API_KEY': '494526896646881',
-    'API_SECRET': 'ExD4ZbNcipoPBwjbTbYcfsx2ZxM',
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
